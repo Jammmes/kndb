@@ -1,19 +1,23 @@
 {
-    "defaultSeverity": "error",
-    "extends": [
-        "tslint:recommended"
+  "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
+  "rules": {
+    "ban": [
+      true,
+      ["Object", "assign", "use TS2.1 object spread { ...a, ...b }"],
+      ["describe", "only"],
+      ["it", "only"]
     ],
-    "jsRules": {},
-    "rules": {
-        "eofline": false,
-        "max-line-length": false,
-        "quotemark": [true, "single", "jsx-single"],
-        "arrow-parens": [true, "ban-single-arg-parens"],
-        "trailing-comma": [false, {"multiline": "always", "singleline": "always"}],
-        "ordered-imports": false,
-        "object-literal-sort-keys": false,
-        "no-console": [false, "log", "error"],
-        "no-var-requires": false
-    },
-    "rulesDirectory": []
+    "object-literal-sort-keys": false,
+    "variable-name": [
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore",
+      "allow-pascal-case"
+    ],
+    "max-line-length": [180],
+    "max-classes-per-file": [true, 5]
+  },
+  "jsRules": {
+    "object-literal-shorthand": true
+  }
 }

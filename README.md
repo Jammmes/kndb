@@ -1,96 +1,156 @@
-# FAST FullStack React with TypeScript starter kit.
+[![Build Status](https://travis-ci.org/jquintozamora/react-typescript-webpack2-cssModules-postCSS.svg?branch=master)](https://travis-ci.org/jquintozamora/react-typescript-webpack2-cssModules-postCSS)
+ [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=jquintozamora/react-typescript-webpack2-cssModules-postCSS&identifier=80755170)](https://dependabot.com)
+ [![codecov](https://codecov.io/gh/jquintozamora/react-typescript-webpack2-cssModules-postCSS/branch/master/graph/badge.svg)](https://codecov.io/gh/jquintozamora/react-typescript-webpack2-cssModules-postCSS)
 
-<img src="https://github.com/gilamran/fullstack-typescript/raw/master/assets/images/logo.png" width="150">
+# Simple Starter Template for React, TypeScript, postCSS, ITCSS, CSS-Modules, Webpack 2 and Live Reloading (React Hot Loader 3)
 
----
+Use this Starter template to create quickly first scaffolding for your SPA project.
+If you like to don't forget to ★ on Github.
 
-### Quick Start
 
-Just clone this repository into your own project folder. and start working
+## Features
+- [React](https://facebook.github.io/react)
+- [TypeScript](https://www.typescriptlang.org) (compiling directly to ES5)
+  - Using [@types instead of TSD or typings folder](https://github.com/jquintozamora/react-typescript-webpack2-cssModules-postCSS/blob/master/tsconfig.json#L43)
+- [Hot Module Replacement](https://medium.com/@dan_abramov/hot-reloading-in-react-1140438583bf#.xh6v0ht7j) ([React Hot Loader](https://github.com/gaearon/react-hot-loader/issues/243))
+- [Webpack](https://webpack.js.org)
+    - [Webpack-dev-server](https://webpack.js.org/configuration/dev-server/)
+    - [Webpack configuration for HMR](https://webpack.js.org/concepts/hot-module-replacement/)
+    - Webpack production configuration
+         - Split out css files using [ExtractTextPlugin](https://webpack.js.org/plugins/extract-text-webpack-plugin)
+         - [UglifyJsPlugin with options](https://github.com/webpack/webpack/blob/v2.4.1/lib/optimize/UglifyJsPlugin.js)
+         - Use include in the loader instead of the exclude. [More info](http://stackoverflow.com/questions/37823764/how-include-and-exclude-works-in-webpack-loader)
+         - More perfomance tips: [here](https://medium.com/@khanght/optimize-webpack-production-build-ec594242b222#.bj3eyg65p)
+    - [Webpack stats](https://github.com/jquintozamora/react-typescript-webpack2-cssModules-postCSS/blob/master/webpack/webpack.config.stats.js) (bundle optimization helper)
+        - Generate stats.json file with profiler. Use (this tool)[http://webpack.github.io/analyse/] to analyze it.
+        - [webpack visualizer](https://chrisbateman.github.io/webpack-visualizer/)
+- [EditorConfig](http://editorconfig.org/)
+- Styling
+  - General Styling (app/stylesheets):
+      - To include variables, generic CSS, normalize, reset, type selectors, ...
+      - Methodology: [ITCSS](http://itcss.io)
+      - Tools: [postCSS](http://postcss.org) with [import](https://github.com/postcss/postcss-import), [nesting](https://www.npmjs.com/package/postcss-nesting), [custom properties](https://github.com/postcss/postcss-custom-properties) and [autoprefixer](https://github.com/postcss/autoprefixer).
+  - Components Styling (app/src/components/...):
+      - To be the module's CSS
+      - Techniques: [CSS Modules](https://github.com/css-modules/css-modules) + [postCSS](http://postcss.org) ([import](https://github.com/postcss/postcss-import), [nesting](https://www.npmjs.com/package/postcss-nesting), [custom properties](https://github.com/postcss/postcss-custom-properties) and [autoprefixer](https://github.com/postcss/autoprefixer)).
+- Linting
+  - TypeScript:
+    - [TSLint](https://palantir.github.io/tslint): general rules + [react rules](https://github.com/palantir/tslint-react)
+    - [VS Code TSLint extension](https://marketplace.visualstudio.com/items?itemName=eg2.tslint)
+  - Styles
+    - [Stylint](https://stylelint.io): CSS rules
+      - Rules are on .stylelintrc.json
+      - [All the rules](https://stylelint.io/user-guide/rules)
+    - Install VS Code extensions:
+        - [stylelint](https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint)
+        - [stylefmt](https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-stylefmt)
+          - Shift + Alt + F (Format Code)
+          - Be sure you have these configurations on your .vscode/settings.json:
+              - "css.validate": false,
+              - "stylelint.enable": true
+- Testing
+  - [Jest](https://facebook.github.io/jest/): testing framework
+  - Enzyme: helper for testing react components
+    - enzime-to-json: display snapshots correctly with jest and enzyme
+  - identity-obj-proxy: mock css files when testing
+  - react-test-renderer: tbc
+  - ts-jest: needed to make work jest with TypeScript
 
+
+
+
+## Getting Started
+### Install pre-requisites
+- Node.js and NPM: [Download and install](https://nodejs.org/). *I have version 7.9.0 of Node and 4.5.0 of NPM on Windows PC*
+- Git: [Download and install](https://git-scm.com/). *I have version 2.7.4 installed on Windows PC*
+
+### Clone Repo
+1. Get the url of your forked project.
+    - Go to https://github.com/username/react-typescript-webpack2-cssModules-postCSS
+2. Click on **"Clone or download"** and Copy to clipboard the url ending on .git.
+3. Open your command line and go to your directoy
+*You don't need to create a specific folder for the project, it will be created by git*
+4. Clone your forked repo on your machine:
 ```
-git clone https://github.com/gilamran/fullstack-typescript.git <MyProjectName>
-cd <MyProjectName>
-npm install
-npm run dev
+$ git clone https://github.com/username/react-typescript-webpack2-cssModules-postCSS
+```
+*Note: That will create a new folder called react-typescript-webpack2-cssModules-postCSS with all the files in.*
+
+
+### Install Project dependencies
+```
+$ cd react-typescript-webpack2-cssModules-postCSS
+$ npm install
 ```
 
-If you want to detach from this repository into your own repository do this:
 
+### Open the project with your Development IDE
+I use VS Code https://code.visualstudio.com
+Open the project using this command:
 ```
-git remote remove origin
-git remote add origin YOUR_REPO_URL
-git push -u origin master
-```
-
-## Why
-
-- **Simple** to jump into, **Fast** because it is simple.
-- Separate `tsconfig.json` for client and server.
-- Client and server can share code (And types). For example: [IUserDTO.d.ts](https://github.com/gilamran/fullstack-typescript/blob/master/src/shared/IUserDTO.d.ts)
-- The client is bundled using [Webpack](https://webpack.github.io/) because it goes to the browser.
-- The server is emitted by [TypeScript](https://github.com/Microsoft/TypeScript) because node 6 supports es6.
-
-<p align="center"> 
-<img src="https://github.com/gilamran/fullstack-typescript/raw/master/assets/images/flow.png" width="500">
-</p>
-
----
-
-### Directory Layout
-
-```
-.
-├── /node_modules/          # 3rd-party libraries and utilities
-├── /dist/                  # All the generated files will go here, and will run from this folder
-├── /src/                   # The source code of the application
-│   ├── /client/            # React app
-│   ├── /server/            # Express server app
-│   ├── /shared/            # The shared code between the client and the server
-├── /assets/                # images, css, jsons etc.
-├── .babelrc                # babel configuration
-├── .gitignore              # ignored git files and folders
-├── .nvmrc                  # Force nodejs version
-├── .env                    # (ignored) Can be used to override environment variables
-├── package.json            # The list of 3rd party libraries and utilities
-└── tslint.json             # TypeScript linting configuration file
-├── README.md               # This file
+$ code .
 ```
 
-### What's included
+### Start development server with Hot Reloading
+```
+$ npm run start
+```
 
-- [React v16](https://facebook.github.io/react/)
-- [React router v4](https://github.com/ReactTraining/react-router)
-- [Material-ui](https://github.com/mui-org/material-ui)
-- [Jest](https://github.com/facebook/jest)
-- [Css modules](https://github.com/css-modules/css-modules)
-- [Axios](https://github.com/mzabriskie/axios) (For Client/Server communication)
+### Build for production
+```
+$ npm run build
+```
 
-### Usage
+### Generate Stats (it stores the html file with the stats under webpack/stats folder)
+```
+$ npm run stats
+```
+You will see the stats:
+<br />
+<img src="./assets/webpackvisualizer.png" width="400">
 
-- `npm run dev` - Client and server are in watch mode with source maps, opens [http://localhost:3000](http://localhost:3000)
-- `npm run test` - Runs jest tests
-- `npm run build` - `dist` folder will include all the needed files, both client (Bundle) and server.
-- `npm start` - Just runs `node ./dist/server/server.js`
-- `npm start:prod` - sets `NODE_ENV` to `production` and then runs `node ./dist/server/server.js`. (Bypassing webpack proxy)
+### Enjoy!
 
-### Config
+## Useful demo
+As part of the boilerplate, you will see a fancy demo app with two react components already created:
+- Viewer
+  - [Stateless component](https://github.com/jquintozamora/react-typescript-webpack2-cssModules-postCSS/blob/master/app/src/components/Viewer/Viewer.tsx) (no state)
+  - Use [CSS-Modules](https://github.com/jquintozamora/react-typescript-webpack2-cssModules-postCSS/blob/master/app/src/components/Viewer/Viewer.module.css)
+- ViewerItem
+  - Create [3 types of Item Card object](https://github.com/jquintozamora/react-typescript-webpack2-cssModules-postCSS/blob/master/app/src/components/ViewerItem/ViewerItemCardType.ts) (singleton, factory static)
+  - Use [inline css using a function to assign CSS depending on the object](https://github.com/jquintozamora/react-typescript-webpack2-cssModules-postCSS/blob/master/app/src/components/ViewerItem/ViewerItem.inlined.css.ts)
+  - Render [Table layout compatible with emails](https://github.com/jquintozamora/react-typescript-webpack2-cssModules-postCSS/blob/master/app/src/components/ViewerItem/ViewerItem.tsx)
 
-All applications require a config mechanism, for example, `SLACK_API_TOKEN`. Things that you don't want in your git history, you want a different environment to have different value (dev/staging/production). This repo uses the file `config.js` (not ts) to access all your app variables. And a `.env` file to override variable in dev environment. This file is ignored from git.
+![demoapp](./assets/demoapp.png)
 
----
 
-#### What's not included
+## License
+BSD 3-Clause License
 
-- Universal (Server side rendering)
-- Redux/MobX (State management)
+Copyright (c) 2019, [José Quinto](https://blog.josequinto.com)
+All rights reserved.
 
-#### Requirements
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
 
-- Node 6+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
 
----
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
 
-#### Licence
+* Neither the name of the copyright holder nor the names of its
+  contributors may be used to endorse or promote products derived from
+  this software without specific prior written permission.
 
-This code is released as is, under MIT licence. Feel free to use it for free for both commercial and private projects. No warranty provided.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

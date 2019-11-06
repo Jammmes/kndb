@@ -1,65 +1,116 @@
 {
-  "name": "fullstack-typescript",
-  "version": "1.1.0",
+  "name": "react-typescript-webpack2-cssmodules-postcss",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "Jose Quinto Zamora",
+    "email": "quintorel@hotmail.com",
+    "url": "https://blog.josequinto.com"
+  },
   "description": "",
-  "main": "index.js",
-  "engines": {
-    "node": ">=6.9.5"
-  },
-  "scripts": {
-    "test": "jest",
-    "clean": "rimraf dist",
-    "lint": "tslint -c tslint.json 'src/**/*.ts' 'src/**/*.tsx'",
-    "start": "node index.js",
-    "start:prod": "cross-env NODE_ENV=production node index.js",
-    "type-check": "tsc -p ./tsconfig.json",
-    "build-client": "cross-env NODE_ENV=production TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack -p",
-    "dev-client": "cross-env TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack-dev-server -w",
-    "dev-client:hot": "cross-env TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack-dev-server -w --hot",
-    "build-server": "tsc -p ./src/server",
-    "dev-server": "tsc-watch -p ./src/server --onSuccess \"node index.js\"",
-    "dev": "npm run clean && concurrently --prefix \"[{name}]\" --names \"SERVER,CLIENT\" -c \"bgBlue.bold,bgGreen.bold\" \"npm run dev-server\" \"npm run dev-client\"",
-    "dev:hot": "npm run clean && concurrently --prefix \"[{name}]\" --names \"SERVER,CLIENT\" -c \"bgBlue.bold,bgGreen.bold\" \"npm run dev-server\" \"npm run dev-client:hot\"",
-    "build": "npm run clean && concurrently --prefix \"[{name}]\" --names \"SERVER,CLIENT\" -c \"bgBlue.bold,bgGreen.bold\" \"npm run build-server\" \"npm run build-client\""
-  },
-  "prettier": {
-    "trailingComma": "all",
-    "tabWidth": 2,
-    "semi": true,
-    "singleQuote": true,
-    "jsxSingleQuote": true,
-    "printWidth": 120
-  },
   "keywords": [
-    "typescript",
     "react",
-    "starter-kit",
-    "webpack",
-    "fullstack",
-    "express",
-    "express4",
-    "node"
+    "reactjs",
+    "boilerplate",
+    "hot",
+    "reload",
+    "hmr",
+    "live",
+    "typescript",
+    "tslint",
+    "cssModules",
+    "postCSS",
+    "webpack"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/gilamran/fullstack-typescript.git"
+    "url": "git://github.com/jquintozamora/react-typescript-webpack2-cssModules-postCSS.git"
   },
-  "license": "MIT",
-  "author": "Gil Amran",
+  "engines": {
+    "npm": "6.4.1",
+    "node": "10.15.1"
+  },
+  "scripts": {
+    "start": "node --harmony ./scripts/start.js",
+    "poststart": "npm run dev",
+    "dev": "webpack-dev-server --mode development --open --config ./webpack/webpack.config.js --env.env=dev",
+    "build:prod:bundleVisualizer": "npm run build -- --progress --profile --env.addons=bundleVisualizer",
+    "build:prod:bundleAnalyzer": "npm run build -- --env.addons=bundleAnalizer",
+    "stats": "npm run build:prod:bundleAnalyzer",
+    "build:prod:stats": "npm run build -- --progress --profile --json > ./dist/stats/stats.json",
+    "build": "webpack --mode production --config ./webpack/webpack.config.js --env.env=prod",
+    "test": "jest --env=jsdom",
+    "lint": "tslint -c tslint.json 'app/**/*.ts' --exclude 'app/**/*.d.ts'",
+    "test:coverage": "npm run test && codecov --token=700afad4-77fd-4af9-83b4-dd59f4d87e26",
+    "precommit": "lint-staged",
+    "prepush": "npm run test",
+    "debug:prod": "npm run debug -- --env.env=prod",
+    "debug": "node --inspect-brk ./node_modules/webpack/bin/webpack.js --config ./webpack/webpack.config.js"
+  },
+  "dependencies": {
+    "@types/react": "16.9.11",
+    "@types/react-dom": "16.9.3",
+    "moment": "2.24.0",
+    "react": "16.11.0",
+    "react-dom": "16.11.0"
+  },
+  "devDependencies": {
+    "@types/enzyme": "3.10.3",
+    "@types/jest": "24.0.22",
+    "@types/node": "12.12.3",
+    "@types/react-hot-loader": "4.1.0",
+    "@types/webpack-env": "1.14.1",
+    "acorn": "7.1.0",
+    "autoprefixer": "9.7.1",
+    "codecov": "3.6.1",
+    "compression-webpack-plugin": "3.0.0",
+    "copy-webpack-plugin": "5.0.4",
+    "css-loader": "3.2.0",
+    "css-modules-typescript-loader": "4.0.0",
+    "enzyme": "3.10.0",
+    "enzyme-adapter-react-16": "1.15.1",
+    "enzyme-to-json": "3.4.3",
+    "fork-ts-checker-webpack-plugin": "3.0.1",
+    "html-webpack-plugin": "4.0.0-beta.8",
+    "husky": "3.0.9",
+    "identity-obj-proxy": "3.0.0",
+    "jest": "24.8.0",
+    "lint-staged": "9.4.2",
+    "mini-css-extract-plugin": "0.8.0",
+    "postcss-custom-properties": "9.0.2",
+    "postcss-import": "12.0.1",
+    "postcss-loader": "3.0.0",
+    "postcss-nesting": "7.0.1",
+    "react-hot-loader": "4.12.15",
+    "react-test-renderer": "16.11.0",
+    "source-map-loader": "0.2.4",
+    "style-loader": "1.0.0",
+    "stylelint": "11.1.1",
+    "ts-jest": "24.1.0",
+    "ts-loader": "6.2.1",
+    "tslint": "5.20.1",
+    "tslint-config-prettier": "1.18.0",
+    "tslint-react": "4.1.0",
+    "typescript": "3.7.2",
+    "uglifyjs-webpack-plugin": "2.2.0",
+    "webpack": "4.41.2",
+    "webpack-bundle-analyzer": "3.6.0",
+    "webpack-cli": "3.3.10",
+    "webpack-dev-server": "3.9.0",
+    "webpack-merge": "4.2.2",
+    "webpack-visualizer-plugin": "0.1.11"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "npm run lint",
+      "git add"
+    ]
+  },
   "jest": {
-    "roots": [
-      "<rootDir>/src"
-    ],
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/src/client/setupEnzyme.ts"
-    ],
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -68,73 +119,19 @@
       "json",
       "node"
     ],
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "<rootDir>/src/tsconfig-for-tests.json"
-      }
-    }
-  },
-  "dependencies": {
-    "axios": "^0.19.0",
-    "body-parser": "^1.18.3",
-    "dotenv": "^8.0.0",
-    "ejs": "^2.6.1",
-    "express": "^4.16.4",
-    "find-up": "^4.0.0",
-    "tslib": "^1.9.3"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/plugin-proposal-numeric-separator": "^7.2.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
-    "@babel/plugin-transform-runtime": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/preset-typescript": "^7.1.0",
-    "@material-ui/core": "^4.4.0",
-    "@types/cssnano": "^4.0.0",
-    "@types/enzyme": "^3.10.3",
-    "@types/express": "^4.17.1",
-    "@types/jest": "^24.0.18",
-    "@types/node": "^12.7.4",
-    "@types/react": "^16.9.2",
-    "@types/webpack": "^4.39.1",
-    "@types/webpack-bundle-analyzer": "^2.13.2",
-    "@types/webpack-dev-server": "^3.1.7",
-    "@types/webpack-manifest-plugin": "^2.0.0",
-    "babel-loader": "^8.0.5",
-    "concurrently": "^4.1.2",
-    "core-js": "^3.2.1",
-    "cross-env": "^5.2.1",
-    "css-loader": "^3.2.0",
-    "cssnano": "^4.1.10",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
-    "enzyme-to-json": "^3.4.0",
-    "file-loader": "^4.2.0",
-    "http-proxy-middleware": "^0.20.0",
-    "jest": "^24.9.0",
-    "postcss-loader": "^3.0.0",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-hot-loader": "^4.12.12",
-    "react-router": "^5.0.1",
-    "react-router-dom": "^5.0.1",
-    "request": "^2.88.0",
-    "rimraf": "^3.0.0",
-    "style-loader": "^1.0.0",
-    "ts-jest": "^24.0.2",
-    "ts-node": "^8.3.0",
-    "tsc-watch": "^3.0.0",
-    "tsconfig-paths": "^3.8.0",
-    "tslint": "^5.19.0",
-    "typescript": "^3.6.2",
-    "url-loader": "^2.1.0",
-    "webpack": "^4.32.2",
-    "webpack-bundle-analyzer": "^3.3.2",
-    "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14",
-    "webpack-manifest-plugin": "^2.0.4"
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/unit/__mocks__/fileMock.js",
+      "\\.(css)$": "identity-obj-proxy"
+    },
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "setupFiles": [
+      "<rootDir>/test/setup/setupTests.ts"
+    ],
+    "testURL": "http://localhost",
+    "testEnvironment": "node",
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   }
 }

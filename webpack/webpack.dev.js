@@ -8,7 +8,7 @@ const commonPaths = require("./common-paths");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
+const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 5000;
 const protocol = process.env.HTTPS === "true" ? "https" : "http";
 const host = process.env.HOST || "localhost";
 

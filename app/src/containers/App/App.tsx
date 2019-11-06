@@ -1,7 +1,5 @@
 import * as React from "react";
 import Header from "../../components/Header/Header";
-import Viewer from "../../components/Viewer/Viewer";
-import AsyncLoading from "../../components/AsyncLoading/AsyncLoading";
 import { IAppProps } from "./IAppProps";
 
 import { hot } from "react-hot-loader";
@@ -24,8 +22,6 @@ class App extends React.Component<IAppProps, {}> {
     return (
       <div>
         <Header title={this.props.name} />
-        <AsyncLoading />
-        <Viewer id={"1"} article={article} />
       </div>
     );
   }

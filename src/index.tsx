@@ -10,11 +10,11 @@ import { render } from "react-dom";
     - In webpack Dev it will be injected as /**
     - In webpack prod it will be extracted as a separate bundled file
  */
-import "./../stylesheets/main.css";
+// import "./../stylesheets/main.css";
 
 /*
   Main App Container
  */
-import App from "./containers/App/App";
+import App from "./app/app";
 
 render(<App />, document.getElementById("reactContainer"));

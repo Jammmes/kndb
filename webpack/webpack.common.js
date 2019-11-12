@@ -11,7 +11,7 @@ const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const config = {
   target: "web",
   entry: {
-    bundle: "./app/src/index.tsx"
+    bundle: "./src/index.tsx"
   },
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.

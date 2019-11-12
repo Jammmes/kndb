@@ -34,7 +34,6 @@
     "lint": "tslint -c tslint.json 'app/**/*.ts' --exclude 'app/**/*.d.ts'",
     "test:coverage": "npm run test && codecov --token=700afad4-77fd-4af9-83b4-dd59f4d87e26",
     "precommit": "lint-staged",
-    "prepush": "npm run test",
     "debug:prod": "npm run debug -- --env.env=prod",
     "debug": "node --inspect-brk ./node_modules/webpack/bin/webpack.js --config ./webpack/webpack.config.js"
   },

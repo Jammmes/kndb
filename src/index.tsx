@@ -1,6 +1,6 @@
-import React from "react";
-import { render } from "react-dom";
+import React from 'react';
+import { render } from 'react-dom';
 
-import App from "./app/app";
+import App from './app/app';
 
-render(<App />, document.getElementById("reactContainer"));
+render(<App />, document.getElementById('reactContainer'));

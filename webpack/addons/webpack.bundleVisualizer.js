@@ -1,11 +1,3 @@
-///////////////////////////////////////////////////////////
-//  WebPack Bundler Visualizer addon
-//      You can also upload your stats.json
-//      to http://webpack.github.io/analyse/
-///////////////////////////////////////////////////////////
-//  author: Jose Quinto - https://blog.josequinto.com
-///////////////////////////////////////////////////////////
-
 const Visualizer = require("webpack-visualizer-plugin");
 const path = require("path");
 const commonPaths = require("../common-paths");

@@ -1,12 +1,32 @@
-//////////////////////////////////////////////////////////
-//  WebPack Common (webpack.academy)
-//////////////////////////////////////////////////////////
-//  author: Jose Quinto - https://blog.josequinto.com
-//////////////////////////////////////////////////////////
 
 const commonPaths = require("./common-paths");
 var CopyWebpackPlugin = require("copy-webpack-plugin");
+const path = require('path');
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+
+const cssLoaders = [
+  {
+    loader: 'css-loader',
+    options: {
+      importLoaders: 1,
+      modules: {
+        mode: 'local',
+        localIdentName: '[name]_[local]_[hash:base64:5]'
+      },
+      localsConvention: 'camelCase'
+    }
+  },
+  {
+    loader: 'postcss-loader',
+    options: {
+      plugins: () => [
+        require('autoprefixer')({
+          overrideBrowserslist: ['last 2 versions', 'ie >= 9']
+        })
+      ]
+    }
+  }
+];
 
 const config = {
   target: "web",
@@ -14,20 +34,19 @@ const config = {
     bundle: "./src/index.tsx"
   },
   resolve: {
-    // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: [".ts", ".tsx", ".js"]
+    extensions: [".ts", ".tsx", ".js"],
+    alias: {
+      '@': path.resolve(__dirname, '../src/'),
+    }
   },
   output: {
     filename: "static/js/[name].[hash].js",
     path: commonPaths.outputPath,
-
-    // There are also additional JS chunk files if you use code splitting.
     chunkFilename: "static/js/[name].chunk.js",
-
-    // This is the URL that app is served from. We use "/" in development.
     publicPath: "./"
   },
   optimization: {
+    runtimeChunk: true,
     splitChunks: {
       chunks: "all"
     }
@@ -35,12 +54,55 @@ const config = {
   plugins: [
     new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }),
     new CopyWebpackPlugin([{ from: "public" }], {
-      ignore: [
-        // Doesn't copy any files with a html extension
-        "*.html"
-      ]
+      ignore: ["*.html"]
     })
-  ]
+  ],
+  module: {
+    rules: [
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        loader: 'source-map-loader',
+        exclude: ['/node_modules/']
+      },
+      {
+        test: /\.[tj]s(x?)$/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              happyPackMode: true
+            }
+          }
+        ],
+        include: commonPaths.srcPath,
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/i,
+        use: {
+          loader: 'css-loader'
+        }
+      },
+      {
+        test: /\.scss$/i,
+        exclude: [/node_modules/],
+        include: commonPaths.srcPath,
+        use: [...cssLoaders, { loader: 'sass-loader' }]
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]'
+            }
+          }
+        ]
+      }
+    ]
+  }
 };
 
 module.exports = config;

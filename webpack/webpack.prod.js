@@ -47,10 +47,10 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       "process.env": {
-        NODE_ENV: JSON.stringify("production") // Reduces 78 kb on React library
+        NODE_ENV: JSON.stringify("production")
       },
-      DEBUG: false, // Doesn´t have effect on my example
-      __DEVTOOLS__: false // Doesn´t have effect on my example
+      DEBUG: false,
+      __DEVTOOLS__: false
     }),
     new MiniCssExtractPlugin({
       filename: "static/css/main.css",
@@ -65,81 +65,25 @@ module.exports = {
     })
   ],
   module: {
-    // loaders -> rules in webpack 2
     rules: [
       {
-        enforce: "pre",
-        test: /\.js$/,
-        loader: "source-map-loader",
-        exclude: ["/node_modules/"]
-      },
-      {
-        test: /\.ts(x?)$/,
-        use: [
-          {
-            loader: "ts-loader",
-            options: {
-              happyPackMode: true // IMPORTANT! use happyPackMode mode to speed-up compilation and reduce errors reported to webpack
-            }
-          }
-        ],
+        test: /\.scss$/i,
+        exclude: [/node_modules/],
         include: commonPaths.srcPath,
-        exclude: /node_modules/
-      },
-      {
-        test: /\.css$/i,
-        include: commonPaths.stylesheetsPath, // Use include instead exclude to improve the build performance
         use: [
-          MiniCssExtractPlugin.loader,
           {
-            loader: "css-loader",
-            options: {
-              sourceMap: true,
-              importLoaders: 1,
-            }
+            loader: MiniCssExtractPlugin.loader
           },
-          {
-            loader: "postcss-loader",
-            options: {
-              sourceMap: true,
-              plugins: () => [
-                require("postcss-import")(),
-                require("postcss-nesting")(),
-                require("postcss-custom-properties")(),
-                require("autoprefixer")()
-              ]
-            }
-          }
+          "css-loader"
         ]
       },
       {
         test: /\.css$/i,
-        include: commonPaths.srcPath,
         use: [
-          MiniCssExtractPlugin.loader,
-          'css-modules-typescript-loader',
           {
-            loader: "css-loader",
-            options: {
-              sourceMap: true,
-              importLoaders: 1,
-              modules: {
-                localIdentName: "[name]_[local]_[hash:base64:5]"
-              },
-              localsConvention: 'camelCase',
-            }
+            loader: MiniCssExtractPlugin.loader
           },
-          {
-            loader: "postcss-loader",
-            options: {
-              plugins: () => [
-                require("postcss-import")(),
-                require("postcss-nesting")(),
-                require("postcss-custom-properties")(),
-                require("autoprefixer")()
-              ]
-            }
-          }
+          "css-loader"
         ]
       }
     ]

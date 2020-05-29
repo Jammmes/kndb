@@ -10,8 +10,8 @@ import { Auth } from '@/pages/auth';
 import { Home } from '@/pages/home';
 import { Questions } from '@/pages/questions';
 import { Login } from '@/pages/login';
-import { NotFound } from '@/pages/not-found/not-found';
-import { SignUp } from '@/pages/sign-up/sign-up';
+import { NotFound } from '@/pages/not-found';
+import { SignUp } from '@/pages/sign-up';
 
 // TO DO Sign Up
 class App extends React.Component<{}> {

@@ -3,7 +3,7 @@ import { withRouter, Redirect } from "react-router";
 import app from "@/services/firebase";
 import { AuthContext } from "@/pages/auth";
 
-export const Login: FunctionComponent<any> = ({ history }) => {
+const Login: FunctionComponent<any> = ({ history }) => {
   const handleLogin = useCallback(
     async event => {
       event.preventDefault();
